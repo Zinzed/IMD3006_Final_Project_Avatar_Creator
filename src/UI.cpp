@@ -8,17 +8,17 @@ void UI::loadButtonImages()
 
 void UI::boolInitStates()
 {
-	showStartScreen = false;
+	showStartScreen = true;
 	showInstrucScreen = false;
 	showChoiceScreen = false;
-	showNaomisStyle = true;
+	showNaomisStyle = false;
 	showSumaiyasStyle = false;
 	showZinebsStyle = false;
 
-	enableStartBtns = false;
+	enableStartBtns = true;
 	enableInstrucBtns = false;
 	enableChoiceBtns = false;
-	enableNaomiBtns = true;
+	enableNaomiBtns = false;
 	enableSumaiyaBtns = false;
 	enableZinebBtns = false;
 }
@@ -37,8 +37,8 @@ void UI::setBoundingBoxes()
 	noseBtn_N.set(70, 575, 375, 75);
 	mouthBtn_N.set(550, 575, 375, 75);
 	hairstyleBtn_N.set(70, 730, 375, 75);
-	clothesBtn_N.set(550, 730, 375, 75);
-	accessoriesBtn_N.set(315, 885, 375, 75);
+	//clothesBtn_N.set(550, 730, 375, 75);
+	//accessoriesBtn_N.set(315, 885, 375, 75);
 
 	//Sumaiya button bounding boxes
 
@@ -55,22 +55,21 @@ void UI::mousePressed(int x, int y, int button)
 {
 	if (backBtn_BB_N.inside(x, y) && enableNaomiBtns)
 	{
-		showStartScreen = true;
+		//if the back button is pressed, show the choice screen 
+		//and enable the choice screen's buttons
+
+		showStartScreen = false;
 		showInstrucScreen = false;
-		showChoiceScreen = false;
+		showChoiceScreen = true;
 		showNaomisStyle = false;
 		showSumaiyasStyle = false;
 		showZinebsStyle = false;
 
-		enableStartBtns = true;
+		enableStartBtns = false;
 		enableInstrucBtns = false;
-		enableChoiceBtns = false;
+		enableChoiceBtns = true;
 		enableNaomiBtns = false;
 		enableSumaiyaBtns = false;
 		enableZinebBtns = false;
-	}
-	if (headAToneBtn_BB_N.inside(x, y) && enableNaomiBtns)
-	{
-		//headAControl.cycleHeadATones();
 	}
 }
