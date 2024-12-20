@@ -17,31 +17,54 @@ Sprite::~Sprite() {
     delete[] spriteArray;
 }
 
-void Sprite::loadSprite(const string& imagePath, const string& fileType) {
-    for (int i = 0; i < arraySize; i++) {
+//void Sprite::loadSprite(const string& imagePath, const string& fileType) {
+//    for (int i = 0; i < arraySize; i++) {
+//        spriteArray[i].load(imagePath + ofToString(i + 1) + fileType);
+//    }
+//}
+
+void Sprite::loadSpriteAlt(ofImage spriteArray[], int arrayMax, string imagePath, string fileType)
+{
+    arraySize = arrayMax;
+
+    for (int i = 0; i < arraySize; i++)
+    {
         spriteArray[i].load(imagePath + ofToString(i + 1) + fileType);
+        //cout << "Loaded sprite: " << imagePath + ofToString(i + 1) + fileType << endl;
     }
 }
 
-void Sprite::draw(int index, float x, float y) {
-    if (index >= 0 && index < arraySize) {
-        spriteArray[index].draw(x - spriteArray[index].getWidth() / 2.0, y - spriteArray[index].getHeight() / 2.0);
+//void Sprite::draw(int index, float x, float y) {
+//    if (index >= 0 && index < arraySize) {
+//        spriteArray[index].draw(x - spriteArray[index].getWidth() / 2.0, y - spriteArray[index].getHeight() / 2.0);
+//    }
+//}
+
+void Sprite::cycleSprites(int maxIndex) {
+
+    //cout << "Cycling sprites. Current index before update: " << currentIndex << endl;
+    currentIndex = (currentIndex + 1) % maxIndex;
+    //cout << "Current index after update: " << currentIndex << endl;
+}
+
+void Sprite::drawSprites(ofImage spriteArray[], int maxIndex, float xPos, float yPos)
+{
+    //cout << "Drawing sprite at index: " << currentIndex << endl;
+    if (currentIndex >= 0 && currentIndex < maxIndex) {
+        spriteArray[currentIndex].draw(xPos, yPos);
     }
 }
 
-void Sprite::cycleSprites() {
-    currentIndex = (currentIndex + 1) % arraySize;
-}
 
-int Sprite::getCurrentIndex() const {
-    return currentIndex;
-}
-
-void Sprite::setCurrentIndex(int index) {
-    if (index >= 0 && index < arraySize) {
-        currentIndex = index;
-    }
-}
+//int Sprite::getCurrentIndex() const {
+//    return currentIndex;
+//}
+//
+//void Sprite::setCurrentIndex(int index) {
+//    if (index >= 0 && index < arraySize) {
+//        currentIndex = index;
+//    }
+//}
 //void Sprite::loadHeadATones(string head1, string head2, string head3, string head4, string head5, string head6, string head7, string head8) {
 //	//loadSprite(headATones_S, 8, "Sumaiya_Sprites/headATone", ".png");
 //
