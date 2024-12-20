@@ -17,15 +17,7 @@ class UI
 
 		//bounding boxes for Naomi's buttons
 		ofRectangle backBtn_BB_N;
-		ofRectangle headAToneBtn_BB_N;
-		ofRectangle headBToneBtn_BB_N;
-		ofRectangle eyesBtn_BB_N;
-		ofRectangle eyebrowsBtn_N;
-		ofRectangle noseBtn_N;
-		ofRectangle mouthBtn_N;
-		ofRectangle hairstyleBtn_N;
-		ofRectangle clothesBtn_N;
-		ofRectangle accessoriesBtn_N;
+		
 
 		//Sumaiya's buttons
 		//***insert your button image(s) here***//
@@ -57,13 +49,7 @@ class UI
 		ofRectangle clothesBtn_Z;
 		ofRectangle accessoriesBtn_Z;
 
-		//tracks when buttons should be enabled
-		bool enableStartBtns;
-		bool enableInstrucBtns;
-		bool enableChoiceBtns;
-		bool enableNaomiBtns;
-		bool enableSumaiyaBtns;
-		bool enableZinebBtns;
+		
 
 	public:
 
@@ -81,6 +67,14 @@ class UI
 		bool showSumaiyasStyle;
 		bool showZinebsStyle;
 
+		//tracks when buttons should be enabled
+		bool enableStartBtns;
+		bool enableInstrucBtns;
+		bool enableChoiceBtns;
+		bool enableNaomiBtns;
+		bool enableSumaiyaBtns;
+		bool enableZinebBtns;
+
 		//initial values for all booleans
 		void boolInitStates();
 
@@ -91,6 +85,16 @@ class UI
 		void drawNaomiStyleBtns();
 		//void drawSumaiyaStyleBtns();
 		//void drawZinebStyleBtns();
+
+		ofRectangle headAToneBtn_BB_N;
+		ofRectangle headBToneBtn_BB_N;
+		ofRectangle eyesBtn_BB_N;
+		ofRectangle eyebrowsBtn_N;
+		ofRectangle noseBtn_N;
+		ofRectangle mouthBtn_N;
+		ofRectangle hairstyleBtn_N;
+		/*ofRectangle clothesBtn_N;
+		ofRectangle accessoriesBtn_N;*/
 
 		//button logic
 		void mousePressed(int x, int y, int button);
