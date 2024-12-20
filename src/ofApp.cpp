@@ -3,30 +3,31 @@
 //--------------------------------------------------------------
 void ofApp::setup() {
 
-	m_gui.setup();
+	//m_gui.setup();
 
 	isReset = false;
 
 	isHeadAToneVisible = true;
 	isHeadBToneVisible = false;
 
-	//loading sprites
-	headATones_S.loadHeadATones();
-	headBTones_S.loadHeadBTones();
-	eyes_S.loadEyes();
-	eyebrows_S.loadEyebrows();
-	noses_S.loadNoses();
-	mouthes_S.loadMouthes();
-	clothes_S.loadClothes();
-	hairstyles_S.loadHairstyles();
-	accessories_S.loadAccessories();
+	//Sumaiya stuff
+	headATones_S.loadHeadATones_S();
+	headBTones_S.loadHeadBTones_S();
+	eyes_S.loadEyes_S();
+	eyebrows_S.loadEyebrows_S();
+	noses_S.loadNoses_S();
+	mouthes_S.loadMouthes_S();
+	clothes_S.loadClothes_S();
+	hairstyles_S.loadHairstyles_S();
+	accessories_S.loadAccessories_S();
 
 	buttonControl.loadButtonImages();
 	buttonControl.boolInitStates();
 	buttonControl.setBoundingBoxes();
 
-	clothesBtn_BB_N.set(550, 730, 375, 75);
-	accessoriesBtn_BB_N.set(315, 885, 375, 75);
+	//Naomi stuff
+	//clothesBtn_BB_N.set(550, 730, 375, 75);
+	//accessoriesBtn_BB_N.set(315, 885, 375, 75);
 
 	headAVisible_N = true;
 	headBVisible_N = false;
@@ -43,7 +44,7 @@ void ofApp::setup() {
 
 	TEMPstart.load("StartScreenTemp_DELETE_LATER.png");
 	TEMPoptions.load("OptionsTemp_DELETE_LATER.png");
-	
+
 }
 
 //--------------------------------------------------------------
@@ -57,12 +58,13 @@ void ofApp::draw() {
 	//white bg
 	ofBackground(255);
 
-	float centerX = ofGetWidth() / 2.0;
-	float centerY = ofGetHeight() / 2.0;
+	//float centerX = ofGetWidth() / 2.0;
+	//float centerY = ofGetHeight() / 2.0;
 
 	//drawing sprites
 	float centerX = ofGetWidth() / 2.0;
 	float centerY = ofGetHeight() / 2.0;
+
 
 	if (buttonControl.showStartScreen)
 	{
@@ -91,80 +93,45 @@ void ofApp::draw() {
 		clothes_N.drawSprites(clothes_N.getClothes_N(), 7, 0, 0);
 		accessories_N.drawSprites(accessories_N.getAccessories_N(), 6, 0, 0);
 	}
+	//insert your sprites here :)
 	if (buttonControl.showSumaiyasStyle)
 	{
-		//insert your sprites here :)
+		ofPushMatrix();
+
+		ofSetColor(255);
+		ofScale(1.5);
+		int x = 340;
+		int y = 80;
+
+		
+		if (isHeadAToneVisible && !isHeadBToneVisible)
+		{
+			
+			headATones_S.drawSprites(headATones_S.getHeadATones_S(), 8, x,y);
+		}
+		else if (!isHeadAToneVisible && isHeadBToneVisible)
+		{
+			headBTones_S.drawSprites(headBTones_S.getHeadBTones_S(), 8,x, y);
+		}
+		eyes_S.drawSprites(eyes_S.getEyes_S(), 7, x, y);
+		eyebrows_S.drawSprites(eyebrows_S.getEyebrows_S(), 5, x, y);
+		noses_S.drawSprites(noses_S.getNoses_S(), 5, x, y);
+		mouthes_S.drawSprites(mouthes_S.getMouthes_S(), 5, x, y);
+		clothes_S.drawSprites(clothes_S.getClothes_S(), 8, x, y);
+		hairstyles_S.drawSprites(hairstyles_S.getHairstyles_S(), 7, x, y);
+		accessories_S.drawSprites(accessories_S.getAccessories_S(), 10, x, y);
+
+		ofPopMatrix();
+
+		buttonControl.drawSumaiyaStyleBtns();
+		
 	}
 
-	//*****I dont think we'll need everything below this comment but keeping it just in case*****//
-	//to ensure only one head shape is drawn at a time
-	if (isHeadAToneVisible) {
-		headATones_S.draw(headATones_S.getCurrentIndex(), centerX, centerY);
-	}
-	else {
-		headBTones_S.draw(headBTones_S.getCurrentIndex(), centerX, centerY);
-	}
-	
-	eyes_S.draw(eyes_S.getCurrentIndex(), centerX, centerY);
-	eyebrows_S.draw(eyebrows_S.getCurrentIndex(), centerX, centerY);
-	noses_S.draw(noses_S.getCurrentIndex(), centerX, centerY);
-	mouthes_S.draw(mouthes_S.getCurrentIndex(), centerX, centerY);
-	clothes_S.draw(clothes_S.getCurrentIndex(), centerX, centerY);
-	hairstyles_S.draw(hairstyles_S.getCurrentIndex(), centerX, centerY);
-	accessories_S.draw(accessories_S.getCurrentIndex(), centerX, centerY);
 
-
-
-	m_gui.begin();
-
-	//buttons to cycle through each category 
-	if (ImGui::Button("Head A Tones", ofVec2f(ImGui::GetWindowSize().x, 30.0f))) {
-		headATones_S.cycleHeadATones();
-		isHeadAToneVisible = true;
-		isHeadBToneVisible = false;
-	}
-
-	if (ImGui::Button("Head B Tones", ofVec2f(ImGui::GetWindowSize().x, 30.0f))) {
-		headBTones_S.cycleHeadBTones();
-		isHeadAToneVisible= false;
-		isHeadBToneVisible = true;
-	}
-
-	if (ImGui::Button("Eyes", ofVec2f(ImGui::GetWindowSize().x, 30.0f))) {
-		eyes_S.cycleEyes();
-	}
-
-	if (ImGui::Button("Eyebrows", ofVec2f(ImGui::GetWindowSize().x, 30.0f))) {
-		eyebrows_S.cycleEyebrows();
-	}
-
-	if (ImGui::Button("Nose", ofVec2f(ImGui::GetWindowSize().x, 30.0f))) {
-		noses_S.cycleNoses();
-	}
-	if (ImGui::Button("Mouth", ofVec2f(ImGui::GetWindowSize().x, 30.0f))) {
-		mouthes_S.cycleMouthes();
-	}
-	if (ImGui::Button("Clothes", ofVec2f(ImGui::GetWindowSize().x, 30.0f))) {
-		clothes_S.cycleClothes();
-	}
-	if (ImGui::Button("Hairstyles", ofVec2f(ImGui::GetWindowSize().x, 30.0f))) {
-		hairstyles_S.cycleHairstyles();
-	}
-
-	if (ImGui::Button("Accessories", ofVec2f(ImGui::GetWindowSize().x, 30.0f))) {
-		accessories_S.cycleAccessories();
-	}
-
-	/*if (ImGui::Button("Reset", ofVec2f(ImGui::GetWindowSize().x, 30.0f))) {
-		isReset = true;
-	}*/
-	m_gui.end();
-
-	
 
 }
 
-void ofApp::keyPressed(int key){
+void ofApp::keyPressed(int key) {
 
 	//TEMPORARY this logic will be controlled by the UI class later
 
@@ -255,34 +222,79 @@ void ofApp::naomiCycleBtns(int x, int y)
 	{
 		mouthes_N.cycleMouthes(14);
 	}
-	//if (buttonControl.clothesBtn_N.inside(x, y) && buttonControl.enableNaomiBtns);
-	//{
-	//	cout << "Clothes button pressed" << endl;
-	//	//clothes_N.cycleClothes(7);
-	//}
-	///*if (buttonControl.accessoriesBtn_N.inside(x, y) && buttonControl.enableNaomiBtns);
-	//{
-	//	accessories_N.cycleAccessories(6);
-	//} */
-}
-
-void ofApp::naomiCycleAdditionalBtns(int x, int y)
-{
-	if (clothesBtn_BB_N.inside(x, y) && buttonControl.enableNaomiBtns)
+	if (buttonControl.clothesBtn_N.inside(x, y) && buttonControl.enableNaomiBtns)
 	{
 		clothes_N.cycleClothes(7);
 	}
-	if (accessoriesBtn_BB_N.inside(x, y) && buttonControl.enableNaomiBtns)
+	if (buttonControl.accessoriesBtn_N.inside(x, y) && buttonControl.enableNaomiBtns)
 	{
 		accessories_N.cycleAccessories(6);
-	}
+	} 
 }
 
+void ofApp::sumaiyaCycleBtns(int x, int y)
+{
+	if (buttonControl.headAToneBtn_BB_S.inside(x, y) && buttonControl.enableSumaiyaBtns)
+	{
+		//cout << "headA button was pressed!!!" << endl;
+		headATones_S.cycleHeadATones(8);
+		isHeadAToneVisible = true;
+		isHeadBToneVisible = false;
+	}
+	if (buttonControl.headBToneBtn_BB_S.inside(x, y) && buttonControl.enableSumaiyaBtns)
+	{
+		headBTones_S.cycleHeadBTones(8);
+		isHeadAToneVisible = false;
+		isHeadBToneVisible = true;
+	}
+	if (buttonControl.eyesBtn_BB_S.inside(x, y) && buttonControl.enableSumaiyaBtns)
+	{
+		eyes_S.cycleEyes(7);
+	}
+	if (buttonControl.eyebrowsBtn_S.inside(x, y) && buttonControl.enableSumaiyaBtns)
+	{
+		eyebrows_S.cycleEyebrows(5);
+	}
+	if (buttonControl.hairstyleBtn_S.inside(x, y) && buttonControl.enableSumaiyaBtns)
+	{
+		hairstyles_S.cycleHairstyles(7);
+	}
+	if (buttonControl.noseBtn_S.inside(x, y) && buttonControl.enableSumaiyaBtns)
+	{
+		noses_S.cycleNoses(5);
+	}
+	if (buttonControl.mouthBtn_S.inside(x, y) && buttonControl.enableSumaiyaBtns)
+	{
+		mouthes_S.cycleMouthes(5);
+	}
+
+	if (buttonControl.clothesBtn_S.inside(x, y) && buttonControl.enableSumaiyaBtns)
+	{
+		clothes_S.cycleClothes(8);
+	}
+	if (buttonControl.accessoriesBtn_S.inside(x, y) && buttonControl.enableSumaiyaBtns)
+	{
+		accessories_S.cycleAccessories(10);
+	} 
+}
+//void ofApp::naomiCycleAdditionalBtns(int x, int y)
+//{
+//	if (clothesBtn_BB_N.inside(x, y) && buttonControl.enableNaomiBtns)
+//	{
+//		clothes_N.cycleClothes(7);
+//	}
+//	if (accessoriesBtn_BB_N.inside(x, y) && buttonControl.enableNaomiBtns)
+//	{
+//		accessories_N.cycleAccessories(6);
+//	}
+//}
+
 //--------------------------------------------------------------
-void ofApp::mousePressed(int x, int y, int button){
+void ofApp::mousePressed(int x, int y, int button) {
 
 	buttonControl.mousePressed(x, y, button);
 	naomiCycleBtns(x, y);
-	naomiCycleAdditionalBtns(x, y);
+	sumaiyaCycleBtns(x, y);
+	//naomiCycleAdditionalBtns(x, y);
 	//headATones_N.cycleHeadATones(8);		
 }
